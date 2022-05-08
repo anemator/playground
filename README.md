@@ -11,3 +11,7 @@
 ### Skeletons
 
 - [bash](skeletons/script.bash): A template for bash scripts
+
+### Book Notes/Code
+
+- [Programming Rust (Blandy & Orendorff)](books/programming_rust)
