@@ -41,6 +41,15 @@ p_ = Structure . el "p". escape
 h1_ :: String -> Structure
 h1_ = Structure . el "h1" . escape
 
+ul_ :: [Structure] -> Structure
+ul_ xs = Structure $ el "ul" (concat $ map (el "li" . getStructureString) xs)
+
+ol_ :: [Structure] -> Structure
+ol_ xs = Structure $ el "ol" (concat $ map (el "li" . getStructureString) xs)
+
+pre_ :: String -> Structure
+pre_ = Structure . el "pre" . escape
+
 -- <> has right associativity: a <> (b <> c) === a <> b <> c
 -- . is function compositiion: (f . g) x === f(g(x))
 html_ :: Title -> Structure -> Html
