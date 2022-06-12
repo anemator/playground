@@ -11,6 +11,7 @@
 ### Skeletons
 
 - [bash](skeletons/script.bash): A template for bash scripts
+- [profiling](skeletons/profiling): Basic steps of profiling with gperf, gprof, and valgrind
 
 ### Book Notes/Code
 
