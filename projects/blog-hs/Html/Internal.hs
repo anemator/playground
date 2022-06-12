@@ -10,8 +10,8 @@ newtype Structure = Structure String
 -- type alias
 type Title = String
 
-append_ :: Structure -> Structure -> Structure
-append_ (Structure lhs) (Structure rhs) = Structure $ lhs <> rhs
+instance Semigroup Structure where
+  (<>) (Structure lhs) (Structure rhs) = Structure $ lhs <> rhs
 
 escape :: String -> String
 escape =
