@@ -1,32 +1,42 @@
+-- left Html: type-name lives in types namespace
+-- right Html: constructor lives in the expression namespace
+newtype Html = Html String
+newtype Structure = Structure String
+
+-- type alias
+type Title = String
+
+append_ :: Structure -> Structure -> Structure
+append_ (Structure lhs) (Structure rhs) = Structure $ lhs <> rhs
+
+getStructureString :: Structure -> String
+getStructureString (Structure str) = str
+
 -- -> is right associative: a -> b -> c === a -> (b -> c)
 el :: String -> String -> String
 el tag content =
   "<" <> tag <> ">" <> content <> "</" <> tag <> ">"
 
-head_ :: String -> String
-head_ = el "head"
+p_ :: String -> Structure
+p_ = Structure . el "p"
 
-title_ :: String -> String
-title_ = el "title"
-
-html_ :: String -> String
-html_ = el "html"
-
-body_ :: String -> String
-body_ = el "body"
-
-p_ :: String -> String
-p_ = el "p"
-
-h1_ :: String -> String
-h1_ = el "h1"
+h1_ :: String -> Structure
+h1_ = Structure . el "h1"
 
 -- <> has right associativity: a <> (b <> c) === a <> b <> c
 -- . is function compositiion: (f . g) x === f(g(x))
-makeHtml :: String -> String -> String
-makeHtml title content = html_ $ (head_ . title_ $ title) <> body_ content
+html_ :: Title -> Structure -> Html
+html_ title content =
+  Html $ el "html" $
+      (el "head" $ el "title" title) <> (el "body" $ getStructureString content)
 
-myHtml :: String
-myHtml = makeHtml "My page title" (h1_ "My page header" <> p_ "My page content")
+myHtml :: Html
+myHtml =
+  html_
+    "My page title"
+    (append_ (h1_ "My page header") (p_ "My page content"))
 
-main = putStrLn myHtml
+render :: Html -> String
+render (Html str) = str
+
+main = putStrLn $ render myHtml
