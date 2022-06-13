@@ -3,8 +3,6 @@ module Html
   ( Html -- export type only NOT constructor
   , Title
   , Structure
-  , concatStructure
-  , empty_
   , html_
   , h_
   , p_
