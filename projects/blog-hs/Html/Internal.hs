@@ -1,6 +1,8 @@
 -- unstable interface to Html (for advanced usage)
 module Html.Internal where
 
+import Numeric.Natural
+
 -- left Html: type-name lives in types namespace
 -- right Html: constructor lives in the expression namespace
 newtype Html = Html String
@@ -38,8 +40,8 @@ el tag content =
 p_ :: String -> Structure
 p_ = Structure . el "p". escape
 
-h1_ :: String -> Structure
-h1_ = Structure . el "h1" . escape
+h_ :: Natural -> String -> Structure
+h_ n = Structure . el ("h" <> show n) . escape
 
 ul_ :: [Structure] -> Structure
 ul_ xs = Structure $ el "ul" (concat $ map (el "li" . getStructureString) xs)
