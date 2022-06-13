@@ -37,6 +37,9 @@ el :: String -> String -> String
 el tag content =
   "<" <> tag <> ">" <> content <> "</" <> tag <> ">"
 
+empty_ :: Structure
+empty_ = Structure ""
+
 p_ :: String -> Structure
 p_ = Structure . el "p". escape
 
@@ -60,6 +63,12 @@ html_ title content =
       (el "head" $ el "title" (escape title))
       <>
       (el "body" $ getStructureString content)
+
+concatStructure :: [Structure] -> Structure
+concatStructure list =
+  case list of
+    [] -> empty_
+    hd : tl -> hd <> concatStructure tl
 
 render :: Html -> String
 render (Html str) = str
