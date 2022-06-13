@@ -1,10 +1,11 @@
+import System.Directory (doesFileExist)
+import System.Environment (getArgs)
+import qualified Convert
+import qualified Markup
 import Html
 
-myHtml :: Html
-myHtml =
-  html_
-    "My page title"
-    (append_ (h1_ "My page header") (p_ "My page content"))
+process :: Title -> String -> String
+process title = render . Convert.convert title . Markup.parse
 
 main :: IO ()
-main = putStrLn $ render myHtml
+main = putStrLn $ process "My page title" "* My header\nMy content"
