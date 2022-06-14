@@ -1,11 +1,18 @@
+module HsBlog
+  ( main
+  , process
+  )
+where
+
+import qualified HsBlog.Markup as Markup
+
 import System.Directory (doesFileExist)
 import System.Environment (getArgs)
-import qualified Convert
-import qualified Markup
-import Html
+import HsBlog.Convert (convert)
+import HsBlog.Html as Html
 
 process :: Title -> String -> String
-process title = render . Convert.convert title . Markup.parse
+process title = render . convert title . Markup.parse
 
 confirm :: IO Bool
 confirm = do

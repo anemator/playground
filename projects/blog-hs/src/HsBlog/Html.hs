@@ -1,5 +1,5 @@
 -- stable interface to Html
-module Html
+module HsBlog.Html
   ( Html -- export type only NOT constructor
   , Title
   , Structure
@@ -13,4 +13,4 @@ module Html
   )
   where
 
-import Html.Internal
+import HsBlog.Html.Internal

@@ -1,5 +1,5 @@
 -- unstable interface to Html (for advanced usage)
-module Html.Internal where
+module HsBlog.Html.Internal where
 
 import Numeric.Natural
 
